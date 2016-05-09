@@ -1,0 +1,16 @@
+---
+
+dependencies: [ ]
+
+galaxy_info:
+  author: "David Reed"
+  description: "Install Kibana."
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+  categories:
+    - development
+

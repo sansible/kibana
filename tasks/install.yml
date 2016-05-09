@@ -1,0 +1,38 @@
+---
+
+- name: Download and unpack Kibana
+  become: yes
+  get_url:
+    url: "https://download.elastic.co/kibana/kibana/{{ kibana.tarball }}.tar.gz"
+    dest: "/usr/local/src/{{ kibana.tarball }}.tar.gz"
+
+- name: Extract the Kibana tarball
+  become: yes
+  unarchive:
+    src: "/usr/local/src/{{ kibana.tarball }}.tar.gz"
+    dest: "/usr/local/src/"
+    copy: no
+
+- name: Install Kibana
+  become: yes
+  command: "mv /usr/local/src/{{ kibana.tarball }} {{ kibana.install_dir }}"
+  args:
+    creates: "{{ kibana.install_dir }}"
+    removes: "/usr/local/src/{{ kibana.tarball }}"
+
+- name: Install Kibana service
+  become: yes
+  template:
+    src: service.j2
+    dest: /etc/init.d/kibana4
+    mode: 764
+  notify:
+    - start kibana
+    
+- name: Enable Kibana service
+  become: yes
+  service:
+    name: kibana4
+    enabled: yes
+  notify:
+    - start kibana

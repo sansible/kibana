@@ -1,0 +1,9 @@
+---
+
+- name: Configure Kibana
+  become: yes
+  template:
+    src: kibana.yml.j2
+    dest: "{{ kibana.install_dir }}config/kibana.yml"
+  notify:
+    - restart kibana

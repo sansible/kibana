@@ -1,0 +1,11 @@
+---
+
+- name: Install Kibana
+  include: install.yml
+  tags:
+    - build
+
+- name: Configure Kibana
+  include: configure.yml
+  tags:
+    - configure

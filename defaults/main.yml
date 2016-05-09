@@ -1,0 +1,11 @@
+---
+
+kibana:
+  host: "0.0.0.0"
+  install_dir: "/usr/share/kibana4/"
+  port: 5601
+  tarball: "kibana-4.1.2-linux-x64"
+
+  elasticsearch:
+    host: elasticsearch.elk.internal
+    port: 9200

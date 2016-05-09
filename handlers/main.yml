@@ -1,0 +1,25 @@
+---
+
+- name: reload kibana
+  become: yes
+  service:
+    name: kibana4
+    state: reloaded
+
+- name: restart kibana
+  become: yes
+  service:
+    name: kibana4
+    state: restarted
+
+- name: start kibana
+  become: yes
+  service:
+    name: kibana4
+    state: started
+
+- name: stop kibana
+  become: yes
+  service:
+    name: kibana4
+    state: stopped
