@@ -1,0 +1,4 @@
+---
+
+- src: sansible.elasticsearch
+  version: v1.0

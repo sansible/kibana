@@ -21,15 +21,25 @@
     creates: "{{ kibana.install_dir }}"
     removes: "/usr/local/src/{{ kibana.tarball }}"
 
+- name: Install Kibana plugins
+  become: yes
+  command: "{{ kibana.install_dir }}/bin/kibana plugin --install {{ item.plugin_name }}"
+  args:
+    chdir: "{{ kibana.install_dir }}"
+    creates: "{{ kibana.install_dir }}/installedPlugins/{{ item.plugin_dir }}"
+  environment:
+    JAVA_HOME: /usr/share/java
+  with_items: kibana.plugins
+
 - name: Install Kibana service
   become: yes
   template:
-    src: service.j2
-    dest: /etc/init.d/kibana4
+    src: service.conf.j2
+    dest: /etc/init/kibana4.conf
     mode: 764
   notify:
     - start kibana
-    
+
 - name: Enable Kibana service
   become: yes
   service:

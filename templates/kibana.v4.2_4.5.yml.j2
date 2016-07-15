@@ -1,0 +1,21 @@
+##
+# {{ ansible_managed }}
+#
+
+elasticsearch.url: "http://{{ kibana.elasticsearch.host }}:{{ kibana.elasticsearch.port }}/"
+
+elasticsearch.preserveHost: true
+
+kibana.defaultAppId: "discover"
+
+elasticsearch.requestTimeout: 300000
+
+elasticsearch.shardTimeout: 0
+
+elasticsearch.ssl.verify: true
+
+kibana.index: ".kibana"
+
+server.port: {{ kibana.port }}
+
+server.host: {{ kibana.host }}
