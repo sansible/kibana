@@ -8,9 +8,11 @@ Develop: [![Build Status](https://travis-ci.org/sansible/kibana.svg?branch=devel
 * [Tags](#tags)
 * [Examples](#examples)
 
-This roles installs Kibana for the ELK stack.
+This role installs Kibana.
 
 For more information on Kibana please visit [elastic kibana](https://www.elastic.co/products/kibana).
+
+**Note** Supports Kibana 4
 
 
 
@@ -55,12 +57,25 @@ This role uses two tags: **build** and **configure**
 
 ## Examples
 
-To install:
+To install the defaul version (4.1.2):
 
 ```YAML
-- name: Elk Kibana
+- name: Kibana
   hosts: "{{ hosts }}"
 
   roles:
     - role: kibana
+```
+
+To install a specific version:
+
+```YAML
+- name: Kibana
+  hosts: "{{ hosts }}"
+
+  roles:
+    - role: kibana
+      kibana:
+        tarball: kibana-4.5.2-linux-x64
+        version: 4.5.2
 ```

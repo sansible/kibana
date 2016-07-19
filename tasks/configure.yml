@@ -1,12 +1,22 @@
 ---
 
-- name: Configure Kibana
+- name: Configure Kibana v4.0 - v4.1
   become: yes
   template:
-    src: kibana.yml.j2
+    src: kibana.v4.0_4.1.yml.j2
     dest: "{{ kibana.install_dir }}config/kibana.yml"
   notify:
     - restart kibana
+  when: kibana.version | version_compare('4.2', '<')
+
+- name: Configure Kibana v4.2+
+  become: yes
+  template:
+    src: kibana.v4.2_4.5.yml.j2
+    dest: "{{ kibana.install_dir }}config/kibana.yml"
+  notify:
+    - restart kibana
+  when: kibana.version | version_compare('4.2', '>=')
 
 - name: Ensure Kibana service is started
   become: yes

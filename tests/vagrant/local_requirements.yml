@@ -1,5 +1,0 @@
----
-
-- src: https://github.com/sansible/elasticsearch
-  version: develop
-  name: sansible.elasticsearch

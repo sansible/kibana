@@ -1,11 +1,18 @@
 ---
 
 kibana:
-  host: "0.0.0.0"
-  install_dir: "/usr/share/kibana4/"
+  host: 0.0.0.0
+  install_dir: /usr/share/kibana4/
   port: 5601
-  tarball: "kibana-4.1.2-linux-x64"
+  tarball: kibana-4.1.2-linux-x64
+  # Used to determine which config file to use
+  version: 4.1.2
 
   elasticsearch:
     host: elasticsearch.elk.internal
     port: 9200
+
+  plugins: [ ]
+  # Examples:
+  #  - plugin_name: mobz/elasticsearch-head
+  #    plugin_dir:  head
