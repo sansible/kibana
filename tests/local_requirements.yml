@@ -2,3 +2,6 @@
 
 - src: sansible.elasticsearch
   version: v1.0
+
+- src: sansible.users_and_groups
+  version: v1.1
