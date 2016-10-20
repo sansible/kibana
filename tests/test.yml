@@ -16,14 +16,10 @@
   roles:
     - role: sansible.elasticsearch
       elasticsearch:
-        family: "{{ ( lookup('env','ES_FAMILY') == '' ) | ternary('1.7', lookup('env','ES_FAMILY')) }}"
         plugins: [ ]
-        version: "{{ ( lookup('env','ES_VERSION') == '' ) | ternary('1.7.0', lookup('env','ES_VERSION')) }}"
 
     - role: sansible.kibana
       kibana:
-        tarball: "kibana-{{ ( lookup('env','KIBANA_VERSION') == '' ) | ternary('4.1.2', lookup('env','KIBANA_VERSION')) }}-linux-x64"
-        version: "{{ ( lookup('env','KIBANA_VERSION') == '' ) | ternary('4.1.2', lookup('env','KIBANA_VERSION')) }}"
         elasticsearch:
           host: localhost
           port: 9200

@@ -12,20 +12,22 @@ python: "2.7"
 
 env:
   # Tests v 4.1
-  - ANSIBLE_INSTALL_VERSION="1.9.4"
-  - ANSIBLE_INSTALL_VERSION="2.0.0.2"
-  - ANSIBLE_INSTALL_VERSION="2.0.2.0"
-  - ANSIBLE_INSTALL_VERSION="2.1.1.0"
-  # Test v4.5
-  - ANSIBLE_INSTALL_VERSION="1.9.4" ES_FAMILY="2.x" ES_VERSION="2.3.3" KIBANA_VERSION="4.5.2"
-  - ANSIBLE_INSTALL_VERSION="2.0.0.2" ES_FAMILY="2.x" ES_VERSION="2.3.3" KIBANA_VERSION="4.5.2"
-  - ANSIBLE_INSTALL_VERSION="2.0.2.0" ES_FAMILY="2.x" ES_VERSION="2.3.3" KIBANA_VERSION="4.5.2"
-  - ANSIBLE_INSTALL_VERSION="2.1.1.0" ES_FAMILY="2.x" ES_VERSION="2.3.3" KIBANA_VERSION="4.5.2"
+  - ANSIBLE_INSTALL_VERSION="1.9.4" KIBANA_VARS="default"
+  - ANSIBLE_INSTALL_VERSION="2.0.2.0" KIBANA_VARS="default"
+  - ANSIBLE_INSTALL_VERSION="2.1.1.0" KIBANA_VARS="default"
+  # Test v4.6
+  - ANSIBLE_INSTALL_VERSION="1.9.4" KIBANA_VARS="4.6"
+  - ANSIBLE_INSTALL_VERSION="2.0.2.0" KIBANA_VARS="4.6"
+  - ANSIBLE_INSTALL_VERSION="2.1.1.0" KIBANA_VARS="4.6"
+  # Test v5 (RC1)
+  - ANSIBLE_INSTALL_VERSION="1.9.4" KIBANA_VARS="5.0-rc1"
+  - ANSIBLE_INSTALL_VERSION="2.0.2.0" KIBANA_VARS="5.0-rc1"
+  - ANSIBLE_INSTALL_VERSION="2.1.1.0" KIBANA_VARS="5.0-rc1"
 
 before_install:
   # Make sure everything's up to date.
   - sudo apt-get update -qq
-  
+
 install:
   # Install Ansible.
   - pip install ansible==${ANSIBLE_INSTALL_VERSION} ansible-lint
@@ -36,19 +38,38 @@ script:
   # First run
   - cd tests/
   # Test the "build" stage
-  - ansible-playbook -i inventory test.yml --tags=build --connection=local
-  - >
-    ansible-playbook -i inventory test.yml --tags=build --connection=local
+  - "ansible-playbook test.yml
+      -i inventory
+      --tags build
+      --connection local
+      --extra-vars @vars_kibana_${KIBANA_VARS}.yml"
+  - "ansible-playbook test.yml
+      -i inventory
+      --tags build
+      --connection local
+      --extra-vars @vars_kibana_${KIBANA_VARS}.yml
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
+    || (echo 'Idempotence test: fail' && exit 1)"
   # Test the "configure" stage
-  - ansible-playbook -i inventory test.yml --tags=configure --connection=local
-  - >
-    ansible-playbook -i inventory test.yml --tags=configure --connection=local
+  - "ansible-playbook test.yml
+      -i inventory
+      --tags configure
+      --connection local
+      --extra-vars @vars_kibana_${KIBANA_VARS}.yml"
+  - "ansible-playbook test.yml
+      -i inventory
+      --tags configure
+      --connection local
+      --extra-vars @vars_kibana_${KIBANA_VARS}.yml
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
-    
+    || (echo 'Idempotence test: fail' && exit 1)"
+  # Assert
+  - "ansible-playbook test.yml
+      -i inventory
+      --tags assert
+      --extra-vars @vars_kibana_${KIBANA_VARS}.yml
+      --connection local"
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
