@@ -67,6 +67,20 @@ To install the defaul version (4.1.2):
     - role: kibana
 ```
 
+To install RC 5
+
+```YAML
+- name: Kibana
+  hosts: "{{ hosts }}"
+
+  roles:
+    - role: kibana
+      kibana:
+        tarball: "kibana-5.0.0-rc1-linux-x86_64"
+        download_base_url: https://artifacts.elastic.co/downloads/kibana/
+        version: 5.0.0-rc1
+```
+
 To install a specific version:
 
 ```YAML

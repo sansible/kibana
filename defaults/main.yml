@@ -4,9 +4,10 @@ kibana:
   host: 0.0.0.0
   install_dir: /usr/share/kibana4/
   port: 5601
-  tarball: kibana-4.1.2-linux-x64
+  tarball: kibana-4.1.11-linux-x64
+  download_base_url: https://download.elastic.co/kibana/kibana/
   # Used to determine which config file to use
-  version: 4.1.2
+  version: 4.1.11
 
   elasticsearch:
     host: elasticsearch.elk.internal

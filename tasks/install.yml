@@ -1,9 +1,9 @@
 ---
 
-- name: Download and unpack Kibana
+- name: "Download and unpack {{ kibana.tarball }}"
   become: yes
   get_url:
-    url: "https://download.elastic.co/kibana/kibana/{{ kibana.tarball }}.tar.gz"
+    url: "{{ kibana.download_base_url }}{{ kibana.tarball }}.tar.gz"
     dest: "/usr/local/src/{{ kibana.tarball }}.tar.gz"
 
 - name: Extract the Kibana tarball
