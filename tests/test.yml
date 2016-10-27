@@ -3,6 +3,9 @@
 - name: Test Kibana role
   hosts: all
 
+  vars_files:
+    - "./vars_kibana_{{ lookup('env', 'KIBANA_VARS') | default('default', true) }}.yml"
+
   pre_tasks:
     - name: Update apt
       become: yes

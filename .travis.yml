@@ -11,18 +11,18 @@ language: python
 python: "2.7"
 
 env:
-  # Tests v 4.1
+  # Tests v 4.6
   - ANSIBLE_INSTALL_VERSION="1.9.4" KIBANA_VARS="default"
   - ANSIBLE_INSTALL_VERSION="2.0.2.0" KIBANA_VARS="default"
   - ANSIBLE_INSTALL_VERSION="2.1.1.0" KIBANA_VARS="default"
-  # Test v4.6
-  - ANSIBLE_INSTALL_VERSION="1.9.4" KIBANA_VARS="4.6"
-  - ANSIBLE_INSTALL_VERSION="2.0.2.0" KIBANA_VARS="4.6"
-  - ANSIBLE_INSTALL_VERSION="2.1.1.0" KIBANA_VARS="4.6"
+  # Test v4.1
+  - ANSIBLE_INSTALL_VERSION="1.9.4" KIBANA_VARS="4.1"
+  - ANSIBLE_INSTALL_VERSION="2.0.2.0" KIBANA_VARS="4.1"
+  - ANSIBLE_INSTALL_VERSION="2.1.1.0" KIBANA_VARS="4.1"
   # Test v5 (RC1)
-  - ANSIBLE_INSTALL_VERSION="1.9.4" KIBANA_VARS="5.0-rc1"
-  - ANSIBLE_INSTALL_VERSION="2.0.2.0" KIBANA_VARS="5.0-rc1"
-  - ANSIBLE_INSTALL_VERSION="2.1.1.0" KIBANA_VARS="5.0-rc1"
+  - ANSIBLE_INSTALL_VERSION="1.9.4" KIBANA_VARS="5.0"
+  - ANSIBLE_INSTALL_VERSION="2.0.2.0" KIBANA_VARS="5.0"
+  - ANSIBLE_INSTALL_VERSION="2.1.1.0" KIBANA_VARS="5.0"
 
 before_install:
   # Make sure everything's up to date.
@@ -41,13 +41,11 @@ script:
   - "ansible-playbook test.yml
       -i inventory
       --tags build
-      --connection local
-      --extra-vars @vars_kibana_${KIBANA_VARS}.yml"
+      --connection local"
   - "ansible-playbook test.yml
       -i inventory
       --tags build
       --connection local
-      --extra-vars @vars_kibana_${KIBANA_VARS}.yml
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)"
@@ -55,13 +53,11 @@ script:
   - "ansible-playbook test.yml
       -i inventory
       --tags configure
-      --connection local
-      --extra-vars @vars_kibana_${KIBANA_VARS}.yml"
+      --connection local"
   - "ansible-playbook test.yml
       -i inventory
       --tags configure
       --connection local
-      --extra-vars @vars_kibana_${KIBANA_VARS}.yml
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)"
@@ -69,7 +65,6 @@ script:
   - "ansible-playbook test.yml
       -i inventory
       --tags assert
-      --extra-vars @vars_kibana_${KIBANA_VARS}.yml
       --connection local"
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

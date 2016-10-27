@@ -1,10 +1,17 @@
+include .make
+VAGRANT_BOX ?= ubuntu/trusty64
+KIBANA_VARS ?=
 
 .DEFAULT_GOAL := help
 .PHONY: help
 
+export VAGRANT_BOX KIBANA_VARS
+
 all: test vagrant_halt clean
 
 ## Run tests on any file change
+# Example make watch
+#         make watch VAGRANT_BOX=ubuntu/xenial64
 watch: test_deps
 	while sleep 1; do \
 		find defaults/ meta/ tasks/ templates/ tests/test.yml tests/vagrant/Vagrantfile \
@@ -49,3 +56,6 @@ help:
 		 /^#/  { doc=doc "\n" substr($$0, 2); next } \
 		 /:/   { sub(/:.*/, "", $$0); printf "\033[34m%-30s\033[0m\033[1m%s\033[0m %s\n\n", $$0, doc_h, doc; skip=1 }' \
 		$(MAKEFILE_LIST)
+
+.make:
+	echo "" > .make
