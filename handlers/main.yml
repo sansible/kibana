@@ -3,23 +3,23 @@
 - name: reload kibana
   become: yes
   service:
-    name: kibana4
+    name: kibana
     state: reloaded
 
 - name: restart kibana
   become: yes
   service:
-    name: kibana4
+    name: kibana
     state: restarted
 
 - name: start kibana
   become: yes
   service:
-    name: kibana4
+    name: kibana
     state: started
 
 - name: stop kibana
   become: yes
   service:
-    name: kibana4
+    name: kibana
     state: stopped

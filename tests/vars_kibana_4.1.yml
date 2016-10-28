@@ -1,0 +1,5 @@
+---
+# Vars for Kibana v4.6
+kibana:
+  tarball: kibana-4.1.2-linux-x64
+  version: 4.1.2

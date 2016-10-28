@@ -31,19 +31,30 @@
     JAVA_HOME: /usr/share/java
   with_items: kibana.plugins
 
+- name: Ensure Systemd Service Configuraiton
+  become: yes
+  template:
+    src: kibana.service.j2
+    dest: /etc/systemd/system/kibana.service
+    mode: 764
+  notify:
+    - start kibana
+  when: ansible_service_mgr is defined and ansible_service_mgr == 'systemd'
+
 - name: Install Kibana service
   become: yes
   template:
     src: service.conf.j2
-    dest: /etc/init/kibana4.conf
+    dest: /etc/init/kibana.conf
     mode: 764
   notify:
     - start kibana
+  when: ansible_service_mgr is not defined or ansible_service_mgr != 'systemd'
 
 - name: Enable Kibana service
   become: yes
   service:
-    name: kibana4
+    name: kibana
     enabled: yes
   notify:
     - start kibana
