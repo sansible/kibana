@@ -29,7 +29,7 @@
     creates: "{{ kibana.install_dir }}/installedPlugins/{{ item.plugin_dir }}"
   environment:
     JAVA_HOME: /usr/share/java
-  with_items: kibana.plugins
+  with_items: "{{ kibana.plugins }}"
 
 - name: Ensure Systemd Service Configuraiton
   become: yes
