@@ -1,6 +1,0 @@
----
-# Vars for Kibana v5
-kibana:
-  download_base_url: https://artifacts.elastic.co/downloads/kibana/
-  tarball: kibana-5.0.0-linux-x86_64
-  version: 5.0.0

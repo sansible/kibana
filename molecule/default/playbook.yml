@@ -1,0 +1,19 @@
+---
+
+- name: Converge
+  hosts: all
+
+  pre_tasks:
+    - name: Install net-tools
+      become: yes
+      apt:
+        name: net-tools
+
+  roles:
+    - role: sansible.elasticsearch
+
+    - role: kibana
+      sansible_kibana_elasticsearch_host: 127.0.0.1
+      sansible_kibana_plugins:
+        - plugin_name: elasticsearch/marvel/latest
+          plugin_dir: marvel

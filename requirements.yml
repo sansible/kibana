@@ -1,0 +1,7 @@
+---
+
+- src: sansible.java
+  version: v2.0
+
+- src: sansible.elasticsearch
+  version: v2.0

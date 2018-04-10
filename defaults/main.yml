@@ -1,19 +1,14 @@
 ---
 
-kibana:
-  host: 0.0.0.0
-  install_dir: /usr/share/kibana4/
-  port: 5601
-  tarball: kibana-4.6.2-linux-x86_64
-  download_base_url: https://download.elastic.co/kibana/kibana/
-  # Used to determine which config file to use
-  version: 4.6.2
-
-  elasticsearch:
-    host: elasticsearch.elk.internal
-    port: 9200
-
-  plugins: [ ]
-  # Examples:
-  #  - plugin_name: mobz/elasticsearch-head
-  #    plugin_dir:  head
+sansible_kibana_download_base_url: https://download.elastic.co/kibana/kibana/
+sansible_kibana_elasticsearch_host: elasticsearch.elk.internal
+sansible_kibana_elasticsearch_port: 9200
+sansible_kibana_host: 0.0.0.0
+sansible_kibana_install_dir: /usr/share/kibana4
+#  - plugin_name: elasticsearch/marvel/latest
+#    plugin_dir:  marvel
+sansible_kibana_plugins: []
+sansible_kibana_port: 5601
+sansible_kibana_tarball: kibana-4.6.2-linux-x86_64
+# Used to determine which config file to use
+sansible_kibana_version: 4.6.2
