@@ -2,11 +2,11 @@
 # {{ ansible_managed }}
 #
 
-port: {{ kibana.port }}
+port: {{ sansible_kibana_port }}
 
-host: {{ kibana.host }}
+host: {{ sansible_kibana_host }}
 
-elasticsearch_url: "http://{{ kibana.elasticsearch.host }}:{{ kibana.elasticsearch.port }}/"
+elasticsearch_url: "http://{{ sansible_kibana_elasticsearch_host }}:{{ sansible_kibana_elasticsearch_port }}/"
 
 elasticsearch_preserve_host: true
 

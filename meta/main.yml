@@ -1,17 +1,16 @@
 ---
 
-dependencies: [ ]
+dependencies: []
 
 galaxy_info:
-  author:
-    - David Reed
-    - Wojtek Oledzki
   description: "Install Kibana4 and Kibana5"
   license: MIT
-  min_ansible_version: 1.9
+  min_ansible_version: 2.2
   platforms:
     - name: Ubuntu
       versions:
-        - all
+        - trusty
+        - xenial
+        - bionic
   categories:
     - development
