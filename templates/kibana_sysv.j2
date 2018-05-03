@@ -1,3 +1,5 @@
+#!/bin/sh
+#
 ### BEGIN INIT INFO
 # Provides:          kibana
 # Required-Start:    $network
@@ -34,7 +36,7 @@ do_start()
 
 
 do_stop () {
-  pkill node 
+  pkill node
 }
 
 case "$1" in
