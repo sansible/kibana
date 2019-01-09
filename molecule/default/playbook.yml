@@ -4,10 +4,15 @@
   hosts: all
 
   pre_tasks:
-    - name: Install net-tools
+    - name: Install apt-transport-https, net-tools
       become: yes
       apt:
-        name: net-tools
+        name: "{{ item }}"
+        update_cache: yes
+      with_items:
+        - apt-transport-https
+        - lsb-release
+        - net-tools
 
   roles:
     - role: sansible.elasticsearch
