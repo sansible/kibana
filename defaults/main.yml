@@ -7,6 +7,7 @@ sansible_kibana_host: 0.0.0.0
 sansible_kibana_install_dir: /usr/share/kibana4
 #  - plugin_name: elasticsearch/marvel/latest
 #    plugin_dir:  marvel
+sansible_kibana_install_sni_fixes: yes
 sansible_kibana_plugins: []
 sansible_kibana_port: 5601
 sansible_kibana_tarball: kibana-4.6.2-linux-x86_64
