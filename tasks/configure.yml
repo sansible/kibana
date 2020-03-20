@@ -7,7 +7,7 @@
     dest: "{{ sansible_kibana_install_dir }}/config/kibana.yml"
   notify:
     - restart kibana
-  when: sansible_kibana_version is version_compare('4.2', '<')
+  when: sansible_kibana_version is version('4.2', '<')
 
 - name: Configure Kibana v4.2+
   become: yes
@@ -16,7 +16,7 @@
     dest: "{{ sansible_kibana_install_dir }}/config/kibana.yml"
   notify:
     - restart kibana
-  when: sansible_kibana_version is version_compare('4.2', '>=')
+  when: sansible_kibana_version is version('4.2', '>=')
 
 - name: Ensure Kibana Service is Started
   become: yes
